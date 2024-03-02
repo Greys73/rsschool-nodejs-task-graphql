@@ -1,15 +1,28 @@
-import { PrismaClient } from "@prisma/client";
-import { GraphQLBoolean, GraphQLObjectType } from "graphql";
-
-const prisma = new PrismaClient();
+import { GraphQLObjectType } from "graphql";
+import { changeUser, createUser, deleteUser } from "./UserMutations.js";
+import { changePost, createPost, deletePost } from "./PostMutations.js";
+import { changeProfile, createProfile, deleteProfile } from "./ProfileMutations.js";
+import { subscribeTo, unsubscribeFrom } from "./SubscribeNutations.js";
 
 export const mutation = new GraphQLObjectType({
   name: 'Mutation',
   description: 'Root mutation',
   fields: {
-    users: {
-      type: GraphQLBoolean,
-      resolve: () => prisma.user.findMany(),
-    }
+
+    createUser,
+    changeUser,
+    deleteUser,
+
+    createPost,
+    changePost,
+    deletePost,
+
+    createProfile,
+    changeProfile,
+    deleteProfile,
+
+    subscribeTo,
+    unsubscribeFrom,
+
   },
  });
